@@ -1,0 +1,123 @@
+
+<table width="100%">
+    <thead>
+        <tr>
+            <td style="border:1px solid;" width="50%">
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <th colspan="4" style="text-align: center;border-bottom: 1px solid;">CREDIT</th>
+                        </tr>
+                        <tr>
+                            <th width="15%" style="height:40px; background-color:#3c8dbc; color:#FFF; text-align:center;">Date</th>
+                            <th width="10%" style="height:40px; background-color:#3c8dbc; color:#FFF; text-align:center;">Ref. No</th>
+                            <th width="60%" style="height:40px; background-color:#3c8dbc; color:#FFF; text-align:center;">Particulars</th>
+                            <th width="15%" style="height:40px;  background-color:#3c8dbc; color:#FFF; text-align:center;">Credit Amount</th>
+                        </tr>
+                    </thead>
+                </table>
+            </td>
+            <td style="border:1px solid;" width="50%">
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <th colspan="4" style="text-align: center;border-bottom: 1px solid;"">DEBIT</th>
+                        </tr>
+                        <tr>
+                            <th width="15%" style="height:40px;background-color:#3c8dbc;color:#FFF;text-align:center;">Date</th>
+                            <th width="10%" style="height:40px; background-color:#3c8dbc; color:#FFF; text-align:center;">Ref. No</th>
+                            <th width="60%" style="height:40px;background-color:#3c8dbc;color:#FFF;text-align:center;">Particulars</th>
+                            <th width="15%" style="height:40px;background-color:#3c8dbc;color:#FFF;text-align:center;">Debit Amount</th>
+                        </tr>
+                    </thead>
+                </table>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td valign="top" style="border:1px solid;" width="50%">
+                <table width="100%">
+                    <tbody>
+                    <?php while($income=$getIncome->fetch_object()) { ?>              
+                        <tr>
+                            <td width="15%" style="text-align:center; height:30px;"><?php echo date("d-m-Y",strtotime($income->entryDate));?></td>
+                            <td width="10%" style="text-align:center; height:30px;"><?php ?></td>
+                            <td width="60%" style="text-align:left; height:30px;">&nbsp;&nbsp;&nbsp;<?php echo $income->description;?></td>
+                            <td width="15%" style="text-align:right; height:30px;"><?php echo $credited = $income->amount; $credit+=$credited;?>&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                <?php }?>             
+                    </tbody>
+                </table>
+            </td>
+            <td valign="top" style="border:1px solid;" width="50%">
+                <table width="100%">
+                    <tbody>
+                    <?php while($expense=$getExpense->fetch_object()) { ?>              
+                        <tr>
+                            <td width="15%" style="text-align:center; height:30px;"><?php echo date("d-m-Y",strtotime($expense->entryDate));?></td>
+                            <td width="10%" style="text-align:center; height:30px;"><?php ?></td>
+                            <td width="60%" style="text-align:left; height:30px;">&nbsp;&nbsp;&nbsp;<?php echo $expense->description;?></td>
+                            <td width="15%" style="text-align:right; height:30px;"><?php echo $debited=$expense->amount; $debit+=$debited; ?>&nbsp;&nbsp;&nbsp;</td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+    <td style="border:1px solid;" width="50%">
+    <table width="100%">
+    <tfoot>
+    <tr>
+    <th colspan="2" style="text-align:right">Credit :</th>
+    <th width="30%" style="text-align:right"><?php echo number_format($credit,2); ?>&nbsp;&nbsp;</th>
+    </tr>
+    </tfoot>
+    </table>
+    </td>
+    <td style="border:1px solid;" width="50%">
+    <table width="100%">
+    <tfoot>
+    <tr>
+    <th colspan="2" style="text-align:right">Debit :</th>
+    <th width="30%" style="text-align:right"><?php echo number_format($debit,2);; ?>&nbsp;&nbsp;</th>
+    </tr>
+    </tfoot>
+    </table>
+    </td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td></td>
+    <td>
+    <table width="100%">
+    <tfoot style="font-size:16px;">
+    <tr>
+    <th colspan="2" style="text-align:right">Opening Balance :</th>
+    <th width="30%" style="text-align:right"><?php #echo "10,000.00";; ?>&nbsp;&nbsp;</th>
+    </tr>
+    <tr>
+    <th colspan="2" style="text-align:right">Credit :</th>
+    <th width="30%" style="text-align:right"><?php echo number_format($credit,2); ?>&nbsp;&nbsp;</th>
+    </tr>
+    <tr>
+    <th colspan="2" style="text-align:right">Debit :</th>
+    <th width="30%" style="text-align:right"><?php echo number_format($debit,2); ?>&nbsp;&nbsp;</th>
+    </tr>
+    <tr>
+    <th colspan="2" style="text-align:right">Closing Balance :</th>
+    <th width="30%" style="text-align:right"><?php echo number_format(($credit-$debit),2); ?>&nbsp;&nbsp;</th>
+    </tr>
+    </tfoot>
+    </table>
+    </td>
+    </tr>
+    </tfoot>
+    </table>
+
